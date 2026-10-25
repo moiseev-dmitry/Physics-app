@@ -1,69 +1,43 @@
-import Image from "next/image";
+import Link from 'next/link';
+// Import tool that helps load new pages
+import { lessons } from '@/data/physicsData';
+// Import all "lessons" from src/app/data/physicsData
 
+// Export function for next
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    return (
+        <main className="min-h-screen bg-gray-50 flex flex-col items-center py-10">
+            {/* Statistic bar - can add smth like heart (ну типо как в дуолинго сверху сердечки и кристалики)*/}
+            <div className="w-full max-w-md flex justify-between px-6 mb-10 font-bold text-gray-700">
+                <span className="flex items-center gap-1 text-black-500">🎅 52</span>
+                <span className="flex items-center gap-1 text-black-500">😎 67</span>
+                <span className="flex items-center gap-1 text-black-500">💲 30</span>
+            </div>
+
+            {/* Title */}
+            <h1 className="text-3xl font-extrabold text-blue-600 mb-8">Physics Path</h1>
+
+            {/* Path of Lessons */}
+            <div className="flex flex-col items-center gap-6">
+                {lessons.map((lesson, index) => {
+                    // Create a zig-zag effect
+                    const offset = index % 2 === 0 ? 'translate-x-8' : '-translate-x-8';
+
+                    return (
+                        // Dynamic url - generic automatically for every lesson
+                        <Link href={`/lesson/${lesson.id}`} key={lesson.id}>
+                            <div className={`relative flex flex-col items-center group cursor-pointer ${offset}`}>
+                                <div className="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center text-4xl shadow-[0_8px_0_rgb(30,100,200)] group-hover:bg-blue-400 group-active:translate-y-2 group-active:shadow-none transition-all">
+                                    {lesson.icon} {/* Emoji on lesson circle */}
+                                </div>
+                                <span className="mt-2 font-bold text-gray-600 bg-white px-3 py-1 rounded-full shadow-sm">
+                                    {lesson.title} {/* Lesson title */}
+                                </span>
+                            </div>
+                        </Link>
+                    );
+                })}
+            </div>
+        </main>
+    );
 }
