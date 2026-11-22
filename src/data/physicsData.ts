@@ -3,45 +3,121 @@ import { Lesson } from '../types';
 export const lessons: Lesson[] = [
     {
         id: '1',
-        title: 'Basics of Motion',
-        icon: '🍎',
+        title: 'Что изучает физика',
+        icon: '📖',
+        theory: { nameOfFile: '1' }
+    },
+    {
+        id: '2',
+        title: 'Практика: Введение',
+        icon: '🎯',
         questions: [
             {
                 id: 'q1',
                 type: 'multiple-choice',
-                question: 'What is the SI unit of force?',
-                options: ['Joule', 'Newton', 'Watt', 'Pascal'],
-                correctAnswer: 'Newton',
-                explanation: 'Force is measured in Newtons (N).',
+                question: 'Что в переводе с греческого означает слово «физика»?',
+                options: ['Наука', 'Природа', 'Движение', 'Материя'],
+                correctAnswer: 'Природа',
+                explanation: 'Слово «физика» происходит от греческого слова «физик», что означает природа.',
             },
             {
                 id: 'q2',
                 type: 'input',
-                question: 'What is the formula for speed? (Use letters: d = distance, t = time)',
-                correctAnswer: 'd/t',
-                explanation: 'Speed = Distance / Time.',
-            }
-        ],
-    },
-    {
-        id: '2',
-        title: 'Gravity',
-        icon: '🌍',
-        questions: [
-            {
-                id: 'q3',
-                type: 'multiple-choice',
-                question: 'Who discovered the law of universal gravitation?',
-                options: ['Albert Einstein', 'Isaac Newton', 'Galileo Galilei', 'Nikola Tesla'],
-                correctAnswer: 'Isaac Newton',
-                explanation: 'Newton formulated the law of universal gravitation.',
+                question: 'Как называют изменения, происходящие с телами и веществами? (Одно слово)',
+                correctAnswer: 'явления',
+                explanation: 'Таяние льда, кипение воды, ветер — всё это различные явления.',
             }
         ],
     },
     {
         id: '3',
-        title: 'Powers',
-        icon: '🦾',
-        theory: { data: 'In physics, power is the rate at which work is done or energy is transferred from one form to another. While energy measures the total capacity to do work, power measures how quickly that energy is used. For example, two cars might climb the same hill and perform the exact same amount of mechanical work, but the car that reaches the top faster exerts more power.' }
+        title: 'Физические термины',
+        icon: '📖',
+        theory: { nameOfFile: '3' }
     },
+    {
+        id: '4',
+        title: 'Практика: Термины',
+        icon: '🎯',
+        questions: [
+            {
+                id: 'q3',
+                type: 'multiple-choice',
+                question: 'Что из перечисленного является физическим телом?',
+                options: ['Вода', 'Алюминий', 'Луна', 'Железо'],
+                correctAnswer: 'Луна',
+                explanation: 'Луна — это физическое тело. Вода, алюминий и железо — это вещества.',
+            },
+            {
+                id: 'q4',
+                type: 'multiple-choice',
+                question: 'Всё то, из чего состоят физические тела, называют...',
+                options: ['Материей', 'Веществом', 'Явлением', 'Энергией'],
+                correctAnswer: 'Веществом',
+                explanation: 'Железо, медь, резина, воздух, вода — всё это различные вещества.',
+            }
+        ],
+    },
+    {
+        id: '5',
+        title: 'Наблюдения и опыты',
+        icon: '📖',
+        theory: { nameOfFile: '5' }
+    },
+    {
+        id: '6',
+        title: 'Практика: Опыты',
+        icon: '🎯',
+        questions: [
+            {
+                id: 'q5',
+                type: 'multiple-choice',
+                question: 'Чем опыт отличается от простого наблюдения?',
+                options: ['Проводится по плану', 'Требует приборов', 'Проводится дома', 'Не требует гипотезы'],
+                correctAnswer: 'Проводится по плану',
+                explanation: 'Опыты проводят с определённой целью, по заранее обдуманному плану.',
+            }
+        ],
+    },
+    {
+        id: '7',
+        title: 'Физические величины',
+        icon: '📖',
+        theory: { nameOfFile: '7' }
+    },
+    {
+        id: '8',
+        title: 'Практика: Величины',
+        icon: '🎯',
+        questions: [
+            {
+                id: 'q6',
+                type: 'multiple-choice',
+                question: 'Что значит измерить какую-нибудь величину?',
+                options: ['Посмотреть на прибор', 'Сравнить её с однородной величиной', 'Записать число', 'Угадать её значение'],
+                correctAnswer: 'Сравнить её с однородной величиной',
+                explanation: 'Измерить величину — это значит сравнить её с величиной, принятой за единицу.',
+            }
+        ],
+    },
+    {
+        id: '9',
+        title: 'Приборы и приставки',
+        icon: '📖',
+        theory: { nameOfFile: '9' }
+    },
+    {
+        id: '10',
+        title: 'Практика: Приборы',
+        icon: '🎯',
+        questions: [
+            {
+                id: 'q7',
+                type: 'input',
+                question: 'Какая приставка означает умножение на 1000? (Напишите слово)',
+                correctAnswer: 'кило',
+                explanation: 'Приставка «кило» означает 1000. Например, 1 километр = 1000 метров.',
+            }
+        ],
+    }
 ];

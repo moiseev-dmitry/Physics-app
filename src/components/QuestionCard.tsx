@@ -72,7 +72,7 @@ export default function QustionCard({ router, progress, currentQuestion, isCheck
                 {isChecked && (
                     <div className="mb-4">
                         <h3 className={`text-xl font-bold ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-                            {isCorrect ? 'Correct!' : 'Incorrect!'}
+                            {isCorrect ? 'Правильно!' : 'Неправильно!'}
                         </h3>
                         <p className="text-gray-700 mt-2">{currentQuestion.explanation}</p>
                     </div>

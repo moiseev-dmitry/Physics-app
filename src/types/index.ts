@@ -12,8 +12,8 @@ export interface Question {
 }
 
 // Theory type
-export interface Theory {
-    data: string;
+export interface typeTheory {
+    nameOfFile: string;
 }
 
 // Lesson type
@@ -22,6 +22,6 @@ export interface Lesson {
     title: string;
     icon: string; // Emoji for the node - in future picture
     questions?: Question[];
-    theory?: Theory;
+    theory?: typeTheory;
 }
 

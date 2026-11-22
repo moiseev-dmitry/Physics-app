@@ -1,36 +1,27 @@
-"use client"; // Means that this is user's code, running not on server
+"use client";
 
-import { useState } from 'react';   // Needs for get input request - buttons click, etc
-import { useParams, useRouter } from 'next/navigation'; // Read dynamic part of URL; Redirect user to another page 
-import { lessons } from '@/data/physicsData'; // Import all created lessons
-import QustionCard from '@/components/QuestionCard'
-import Theory from '@/components/Theory';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import QustionCard from '@/components/QuestionCard';
+import Theory from '@/components/Theory'; // Import the UI component directly!
 
-// Main function of file
-export default function LessonContent() {
-    const params = useParams();
+// Receive the props passed from page.tsx
+export default function LessonContent({ lesson, theoryData }: { lesson: any, theoryData: any }) {
     const router = useRouter();
 
-    // Find the current lesson based on URL
-    const lesson = lessons.find((l) => l.id === params.id);
-
-    // Current question tracker
+    // State...
     const [currentIndex, setCurrentIndex] = useState(0);
-    // What user type/click tracker
     const [selectedAnswer, setSelectedAnswer] = useState('');
-    // Tracker of user clicking the Check button
     const [isChecked, setIsChecked] = useState(false);
-    // Correct answer check tracker
     const [isCorrect, setIsCorrect] = useState(false);
 
-    // prevent user for typing smth except of number of lesson
-    if (!lesson)
+    if (!lesson) {
         return <div className="p-10 text-center">Lesson not found!</div>;
+    }
 
-
-    if (lesson?.questions) {
+    if (lesson.questions) {
         const currentQuestion = lesson.questions[currentIndex];
-        const progress = ((currentIndex) / lesson.questions.length) * 100;
+        const progress = (currentIndex / lesson.questions.length) * 100;
 
         const handleCheck = () => {
             setIsChecked(true);
@@ -42,22 +33,37 @@ export default function LessonContent() {
         };
 
         const handleNext = () => {
-            if (lesson?.questions)
-                if (currentIndex < lesson.questions.length - 1) {
-                    setCurrentIndex(currentIndex + 1);
-                    setSelectedAnswer('');
-                    setIsChecked(false);
-                } else {
-                    // End of lesson, go back to main page
-                    router.push('/');
-                }
+            if (currentIndex < lesson.questions.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+                setSelectedAnswer('');
+                setIsChecked(false);
+            } else {
+                router.push('/');
+            }
         };
 
-        return <QustionCard key={lesson.id} router={router} progress={progress} currentQuestion={currentQuestion} isChecked={isChecked}
-            selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isCorrect={isChecked} NumberOfQuestions={lesson.questions.length}
-            currentIndex={currentIndex} handleCheck={handleCheck} handleNext={handleNext} />
+        return (
+            <QustionCard
+                key={lesson.id}
+                router={router}
+                progress={progress}
+                currentQuestion={currentQuestion}
+                isChecked={isChecked}
+                selectedAnswer={selectedAnswer}
+                setSelectedAnswer={setSelectedAnswer}
+                isCorrect={isCorrect} // <-- Fixed bug here! It was isChecked
+                NumberOfQuestions={lesson.questions.length}
+                currentIndex={currentIndex}
+                handleCheck={handleCheck}
+                handleNext={handleNext}
+            />
+        );
     }
-    else if (lesson.theory) {
-        return <Theory key={lesson.id} router={router} title={lesson.title} theoryText={lesson.theory?.data} />
+
+    // If it's theory, just render the Theory component with the data from the server
+    else if (lesson.theory && theoryData) {
+        return <Theory router={router} title={theoryData.title} theoryText={theoryData.text} />;
     }
+
+    return null;
 }
