@@ -38,4 +38,10 @@ export const lessons: Lesson[] = [
             }
         ],
     },
+    {
+        id: '3',
+        title: 'Powers',
+        icon: '🦾',
+        theory: { data: 'In physics, power is the rate at which work is done or energy is transferred from one form to another. While energy measures the total capacity to do work, power measures how quickly that energy is used. For example, two cars might climb the same hill and perform the exact same amount of mechanical work, but the car that reaches the top faster exerts more power.' }
+    },
 ];

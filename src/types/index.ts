@@ -11,10 +11,17 @@ export interface Question {
     explanation: string;
 }
 
+// Theory type
+export interface Theory {
+    data: string;
+}
+
 // Lesson type
 export interface Lesson {
     id: string;
     title: string;
     icon: string; // Emoji for the node - in future picture
-    questions: Question[];
+    questions?: Question[];
+    theory?: Theory;
 }
+

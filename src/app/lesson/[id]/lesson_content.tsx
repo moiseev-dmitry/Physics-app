@@ -4,6 +4,7 @@ import { useState } from 'react';   // Needs for get input request - buttons cli
 import { useParams, useRouter } from 'next/navigation'; // Read dynamic part of URL; Redirect user to another page 
 import { lessons } from '@/data/physicsData'; // Import all created lessons
 import QustionCard from '@/components/QuestionCard'
+import Theory from '@/components/Theory';
 
 // Main function of file
 export default function LessonContent() {
@@ -27,30 +28,36 @@ export default function LessonContent() {
         return <div className="p-10 text-center">Lesson not found!</div>;
 
 
-    const currentQuestion = lesson.questions[currentIndex];
-    const progress = ((currentIndex) / lesson.questions.length) * 100;
+    if (lesson?.questions) {
+        const currentQuestion = lesson.questions[currentIndex];
+        const progress = ((currentIndex) / lesson.questions.length) * 100;
 
-    const handleCheck = () => {
-        setIsChecked(true);
-        if (selectedAnswer.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase()) {
-            setIsCorrect(true);
-        } else {
-            setIsCorrect(false);
-        }
-    };
+        const handleCheck = () => {
+            setIsChecked(true);
+            if (selectedAnswer.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase()) {
+                setIsCorrect(true);
+            } else {
+                setIsCorrect(false);
+            }
+        };
 
-    const handleNext = () => {
-        if (currentIndex < lesson.questions.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-            setSelectedAnswer('');
-            setIsChecked(false);
-        } else {
-            // End of lesson, go back to main page
-            router.push('/');
-        }
-    };
+        const handleNext = () => {
+            if (lesson?.questions)
+                if (currentIndex < lesson.questions.length - 1) {
+                    setCurrentIndex(currentIndex + 1);
+                    setSelectedAnswer('');
+                    setIsChecked(false);
+                } else {
+                    // End of lesson, go back to main page
+                    router.push('/');
+                }
+        };
 
-    return <QustionCard key={lesson.id} router={router} progress={progress} currentQuestion={currentQuestion} isChecked={isChecked}
-        selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isCorrect={isChecked} NumberOfQuestions={lesson.questions.length}
-        currentIndex={currentIndex} handleCheck={handleCheck} handleNext={handleNext} />
+        return <QustionCard key={lesson.id} router={router} progress={progress} currentQuestion={currentQuestion} isChecked={isChecked}
+            selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isCorrect={isChecked} NumberOfQuestions={lesson.questions.length}
+            currentIndex={currentIndex} handleCheck={handleCheck} handleNext={handleNext} />
+    }
+    else if (lesson.theory) {
+        return <Theory key={lesson.id} router={router} title={lesson.title} theoryText={lesson.theory?.data} />
+    }
 }
